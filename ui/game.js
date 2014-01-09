@@ -53,7 +53,9 @@ function init(){
   sprites = images.getImage('ui/img/sprites.png');
   bg = new Sprite(images.getImage('ui/img/bg.gif'), 900, 700, [[0,0]]);
   logo = new Sprite(sprites, 250, 150, [
-    [0, 0]
+    [0, 0],
+    [0, 750],
+    [0, 900]
   ]);
 
   players.push(new Player('bob'));
@@ -71,6 +73,8 @@ function frame() {
 
 // set up environment
 function step() {
+  ships.forEach(stepObj);
+  players.forEach(stepObj);
   switch (state){
     case states.NOT_STARTED:
       if (players.length){
@@ -81,9 +85,6 @@ function step() {
       }
       break;
     case states.PLAYING:
-      // controls
-      ships.forEach(stepObj);
-      players.forEach(stepObj);
       players.map(getBombs).reduce(flatten).forEach(checkHit);
 
       // check if you have won
@@ -108,25 +109,23 @@ function draw () {
   c.fillStyle = '#000';
   c.fillRect(0,0,w,h);
   bg.draw(0, 0, 0);
+  players.forEach(drawObj);
+  ships.forEach(drawObj);
   switch (state){
     case states.NOT_STARTED:
       logo.draw((w/2)-125, 100, 0);
-      players.forEach(drawObj);
-      ships.forEach(drawObj);
       drawTextLeft('Press space to start', '16px');
       break;
     case states.PLAYING:
       drawTextLeft('Time: '+ gameTime());
-      players.forEach(drawObj);
-      ships.forEach(drawObj);
       break;
     case states.WON:
       var win = winningPlayer();
-      logo.draw((w/2)-125, 100, 0);
+      logo.draw((w/2)-125, 100, 1);
       drawTextLeft(win.nickname +' has WON!. time: '+ finalTime(), '18px');
       break;
     case states.LOST:
-      logo.draw((w/2)-125, 100, 0);
+      logo.draw((w/2)-125, 100, 2);
       drawTextLeft('You have LOST!', '18px');
       break;
   }
