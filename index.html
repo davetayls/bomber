@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Single Player Bomber</title>
+        <meta name="viewport" content="width=00" />
+        <link rel="stylesheet" href="ui/index.css">
+        <style>
+            body {
+                background: #000;
+                overflow: hidden;
+            }
+            #canvas {
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="900" height="700"></canvas>
+        <div id="controls">
+            <button id="btn-left">LEFT</button>
+            <button id="btn-shoot">SHOOT</button>
+            <button id="btn-right">RIGHT</button>
+        </div>
+        <div id="keys">
+            Keys: Left / Right / Space to shoot<br />
+            As time passes invaders are worth less points
+        </div>
+
+        <!-- helpers -->
+        <script src="ui/helpers/polyfills.js"></script>
+        <script src="ui/helpers/measuring.js"></script>
+        <script src="ui/helpers/images.js"></script>
+        <script src="ui/helpers/keys.js"></script>
+
+        <!-- objects -->
+        <script src="ui/objects/player.js"></script>
+        <script src="ui/objects/bullet.js"></script>
+        <script src="ui/objects/invader.js"></script>
+        <script src="ui/objects/ship.js"></script>
+        <script src="ui/objects/plane.js"></script>
+        <script src="ui/objects/battleship.js"></script>
+
+        <!-- game -->
+        <script src="ui/game.js"></script>
+
+        <script>
+            window.onload = function(){
+
+//                var player = new Player('bob');
+//                players.push(player);
+//
+//                function frame(){
+//                    window.requestAnimationFrame(frame);
+//                    if (player){
+//                        player.keys.left.down = keys.left.down;
+//                        player.keys.right.down = keys.right.down;
+//                        player.keys.space.down = keys.space.down;
+//                    }
+//                }
+//                frame();
+
+            };
+
+        </script>
+
+    </body>
+</html>

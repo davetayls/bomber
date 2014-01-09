@@ -1,0 +1,32 @@
+body {
+    text-align: center;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+#canvas {
+    display: block;
+    border: solid 1px #ccc;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+#controls {
+    padding-top: 5px;
+}
+#controls button {
+    width: 30%;
+    height: 90px;
+}
+#keys {
+    display: none;
+    padding-top: 5px;
+}
+@media all and (min-width:520px){
+    #keys {
+        display: block;
+    }
+    #controls {
+        display: none;
+    }
+}
