@@ -82,8 +82,8 @@ function step() {
       break;
     case states.PLAYING:
       // controls
-      players.forEach(stepObj);
       ships.forEach(stepObj);
+      players.forEach(stepObj);
 
       // check if you have won
       if (false){
