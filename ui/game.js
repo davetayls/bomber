@@ -12,8 +12,8 @@ var logo
   , sprites
   , bg
   , preload = [
-    'ui/img/sprites-godzilla.png',
-    'ui/img/bg-godzilla.gif'
+    'ui/img/sprites.png',
+    'ui/img/bg.gif'
   ]
   ;
 
