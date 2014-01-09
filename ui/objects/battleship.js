@@ -14,6 +14,9 @@ Battleship.prototype = {
   damage: 0,
   x: 0,
   y: 0,
+  step: function(){
+
+  },
   draw: function(){
     this.noDamage.draw(this.x, this.y);
   }

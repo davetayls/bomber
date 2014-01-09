@@ -82,10 +82,8 @@ function step() {
       break;
     case states.PLAYING:
       // controls
-      players.forEach(function(player){
-        if (player.keys.space.down){
-        }
-      });
+      players.forEach(stepObj);
+      ships.forEach(stepObj);
 
       // check if you have won
       if (false){
@@ -136,6 +134,7 @@ function draw () {
 
 
 // helpers
+function stepObj(obj){ obj.step(); }
 function drawObj(obj){ obj.draw(); }
 function drawTextLeft(s, fSize, btm){
   btm = btm || 40;

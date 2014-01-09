@@ -9,11 +9,19 @@ function Plane(){
   this.bombs = [];
 }
 Plane.prototype = {
-  speed: 1,
+  speed: 0.5,
   x: 0,
   y: 0,
+  step: function(){
+    this.x+=this.speed;
+    this.bombs.forEach(stepObj);
+  },
   draw: function(){
-    this.flying.draw(this.x, this.y);
+    this.flying.draw(Math.floor(this.x), this.y);
+    this.bombs.forEach(drawObj);
+  },
+  dropBomb: function(){
+    this.bombs.push(new Bomb(this.x + 125, this.y + 50));
   }
 };
-5
+
