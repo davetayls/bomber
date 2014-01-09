@@ -20,7 +20,7 @@ function Bomb(x, y){
   this.y = y;
 }
 Bomb.prototype = {
-  speedX: 0.5,
+  speedX: 2,
   speedY: 4,
   x: 0,
   y: 0,

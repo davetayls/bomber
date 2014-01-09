@@ -11,7 +11,8 @@ function Battleship(){
   ]);
   this.hit.animate = 10;
   var halfW = w/2;
-  this.x = Math.floor(halfW + (Math.random() * halfW) - 250);
+  var qW = halfW/2;
+  this.x = Math.floor(halfW + qW + (Math.random() * qW) - 250);
   this.y = h - 160;
 }
 Battleship.prototype = {
@@ -31,8 +32,8 @@ Battleship.prototype = {
       this.noDamage.draw(Math.floor(this.x), this.y);
     }
   },
-  left: function(){ return this.x + 10 },
-  right: function(){ return this.x + 200 },
+  left: function(){ return this.x + 35 },
+  right: function(){ return this.x + 190 },
   top: function(){ return this.y + 45 },
   isHit: function(x, y){
     if (y > this.top()){
