@@ -37,37 +37,76 @@ var states = {
   , state = states.NOT_STARTED
 ;
 
+
+
+
+
+
+
 /**
+ * => preloading for canvas
  * With canvas we need to preload the images
  * before we can draw them
  */
 images.preload(preload, init);
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Once the images have been preloaded we are ready to set
  * up the initial state of the game
  */
 function init(){
-  sprites = images.getImage(preload[0]);
-  bg = new Sprite(images.getImage(preload[1]), 900, 700, [[0,0]]);
+  // set up image sprites
+  // sprites =
+  // bg = 900 wide 700 tall
   logo = new Sprite(sprites, 250, 150, [
     [0, 0],
     [0, 750],
     [0, 900]
   ]);
 
-  players.push(new Player('bob'));
-  ships.push(new Battleship());
+  // create a player and a ship
 
   // start the game loop
-  frame();
 }
 
+
+
+
+
+
+
+
+/**
+ * => game loop
+ */
 function frame() {
   window.requestAnimationFrame(frame);
   step(); // move the scene around and check logic
   draw(); // draw the current state of the scene
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // set up environment
 function step() {

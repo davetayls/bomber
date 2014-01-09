@@ -12,9 +12,11 @@ Player.prototype = {
   step: function(){
     this.plane.step();
     if (this.keys.space.down){
-      if (Date.now() - this.dropped > this.reload){
-        this.plane.dropBomb();
-        this.dropped = Date.now();
+      if (Date.now() - gameStartTime > 500){
+        if (Date.now() - this.dropped > this.reload){
+          this.plane.dropBomb();
+          this.dropped = Date.now();
+        }
       }
     }
   },
