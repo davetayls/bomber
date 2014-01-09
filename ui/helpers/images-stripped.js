@@ -1,4 +1,5 @@
-/*global TO_RADIANS:false */
+
+
 var images = {
   images:   {},
   getImage: function (src, cb){
