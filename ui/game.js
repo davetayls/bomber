@@ -13,7 +13,7 @@ var logo
   , bg
   , preload = [
     'ui/img/sprites.png',
-    'ui/img/bg.png'
+    'ui/img/bg.gif'
   ]
   ;
 
@@ -50,7 +50,7 @@ images.preload(preload, init);
  */
 function init(){
   sprites = images.getImage('ui/img/sprites.png');
-  bg = new Sprite(images.getImage('ui/img/bg.png'), 900, 700, [[0,0]]);
+  bg = new Sprite(images.getImage('ui/img/bg.gif'), 900, 700, [[0,0]]);
   logo = new Sprite(sprites, 250, 150, [
     [0, 0]
   ]);
@@ -107,7 +107,7 @@ function draw () {
   bg.draw(0, 0, 0);
   switch (state){
     case states.NOT_STARTED:
-      logo.draw(0, (w/2)-125, 100);
+      logo.draw((w/2)-125, 100, 0);
       drawTextLeft('Press space to start', '16px');
       break;
     case states.PLAYING:
@@ -121,11 +121,11 @@ function draw () {
       break;
     case states.WON:
       var win = winningPlayer();
-      logo.draw(0, (w/2)-170, 100);
+      logo.draw((w/2)-170, 100, 0);
       drawTextLeft(win.nickname +' has WON! Your score is '+ win.ship.points +'. time: '+ finalTime(), '18px');
       break;
     case states.LOST:
-      logo.draw(0, (w/2)-170, 100);
+      logo.draw((w/2)-170, 100, 0);
       drawTextLeft('You have LOST!', '18px');
       break;
   }
