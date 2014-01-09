@@ -25,7 +25,7 @@ Bullet.prototype = {
 	draw: function(){
 		if (!this.destroyed){
 			var o = this.offset();
-			this.sprite.draw(0, this.x - o.x, this.y - o.y);
+			this.sprite.draw(this.x - o.x, this.y - o.y, 0);
 		}
 	},
 	move: function(){

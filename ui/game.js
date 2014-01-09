@@ -19,6 +19,7 @@ var logo
 
 // objects
 var players = []
+  , ships = []
   ;
 
 // score
@@ -54,6 +55,9 @@ function init(){
   logo = new Sprite(sprites, 250, 150, [
     [0, 0]
   ]);
+
+  players.push(new Player('bob'));
+  ships.push(new Battleship());
 
   // start the game loop
   frame();
@@ -108,16 +112,14 @@ function draw () {
   switch (state){
     case states.NOT_STARTED:
       logo.draw((w/2)-125, 100, 0);
+      players.forEach(drawObj);
+      ships.forEach(drawObj);
       drawTextLeft('Press space to start', '16px');
       break;
     case states.PLAYING:
-      drawTextLeft('Time: '+ gameTime())
-      players.forEach(function(player){
-        player.draw();
-      });
-      bullets.forEach(function(bullet, i){
-        bullet.draw();
-      });
+      drawTextLeft('Time: '+ gameTime());
+      players.forEach(drawObj);
+      ships.forEach(drawObj);
       break;
     case states.WON:
       var win = winningPlayer();
@@ -134,6 +136,7 @@ function draw () {
 
 
 // helpers
+function drawObj(obj){ obj.draw(); }
 function drawTextLeft(s, fSize, btm){
   btm = btm || 40;
   fSize = fSize || '12px';

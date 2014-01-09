@@ -17,7 +17,6 @@ function Ship(){
 	this.sprite = new Sprite(sprites, this.w, this.h, spr);
 
     this.spriteIndex = shipCount % spr.length;
-    console.log(this.spriteIndex);
     this.playerNumber = shipCount;
     shipCount++;
 }
@@ -33,7 +32,7 @@ Ship.prototype = {
 
 	draw: function(){
 		var o = this.offset();
-		this.sprite.draw(this.spriteIndex, this.x - o.x, this.y - o.y);
+		this.sprite.draw(this.x - o.x, this.y - o.y, this.spriteIndex);
 	},
 	offset: function(){
 		return {

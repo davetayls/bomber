@@ -71,15 +71,20 @@ Sprite.prototype = {
   pos: 0,
   draw: function (x, y, position){
     if (typeof position !== 'undefined'){
-       this.pos = this.positions[position];
-    } else if (this.animate){
-      if (this.frames === 0){
-        this.frames = this.animate;
-        this.pos = this.pos ? this.pos-1 : this.positions.length-1;
+      this.pos = position;
+    } else {
+      if (this.animate){
+        if (this.frames === 0){
+          this.frames = this.animate;
+          this.pos = this.pos === 0 ? this.positions.length-1 : this.pos -1;
+        } else {
+          this.frames--;
+        }
       } else {
-        this.frames--;
+        this.pos = 0;
       }
     }
-    images.drawSprite(this.img, this.pos[0], this.pos[1], this.width, this.height, x, y);
+    var pos = this.positions[this.pos];
+    images.drawSprite(this.img, pos[0], pos[1], this.width, this.height, x, y);
   }
 };
