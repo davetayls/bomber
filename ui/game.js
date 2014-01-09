@@ -12,8 +12,8 @@ var logo
   , sprites
   , bg
   , preload = [
-    'ui/img/sprites.png',
-    'ui/img/bg.gif'
+    'ui/img/sprites-godzilla.png',
+    'ui/img/bg-godzilla.gif'
   ]
   ;
 
@@ -50,8 +50,8 @@ images.preload(preload, init);
  * up the initial state of the game
  */
 function init(){
-  sprites = images.getImage('ui/img/sprites.png');
-  bg = new Sprite(images.getImage('ui/img/bg.gif'), 900, 700, [[0,0]]);
+  sprites = images.getImage(preload[0]);
+  bg = new Sprite(images.getImage(preload[1]), 900, 700, [[0,0]]);
   logo = new Sprite(sprites, 250, 150, [
     [0, 0],
     [0, 750],
@@ -73,8 +73,6 @@ function frame() {
 
 // set up environment
 function step() {
-  ships.forEach(stepObj);
-  players.forEach(stepObj);
   switch (state){
     case states.NOT_STARTED:
       if (players.length){
@@ -85,6 +83,8 @@ function step() {
       }
       break;
     case states.PLAYING:
+      ships.forEach(stepObj);
+      players.forEach(stepObj);
       players.map(getBombs).reduce(flatten).forEach(checkHit);
 
       // check if you have won
@@ -99,6 +99,10 @@ function step() {
         gameEndTime = new Date().getTime();
       }
       break;
+    case states.WON:
+    case states.LOST:
+      ships.forEach(stepObj);
+      players.forEach(stepObj);
   }
 
 }
