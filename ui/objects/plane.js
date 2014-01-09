@@ -9,7 +9,7 @@ function Plane(){
   this.bombs = [];
 }
 Plane.prototype = {
-  speed: 0.5,
+  speed: 1,
   x: 0,
   y: 0,
   step: function(){

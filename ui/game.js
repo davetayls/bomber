@@ -84,6 +84,7 @@ function step() {
       // controls
       ships.forEach(stepObj);
       players.forEach(stepObj);
+      players.map(getBombs).reduce(flatten).forEach(checkHit);
 
       // check if you have won
       if (false){
@@ -133,9 +134,30 @@ function draw () {
 
 
 
-// helpers
+// functional
 function stepObj(obj){ obj.step(); }
 function drawObj(obj){ obj.draw(); }
+
+function getBombs(player){
+  return player.plane.bombs
+}
+function flatten(prev, current, i, arr){
+  if (typeof prev === 'undefined'){
+    prev = [];
+  }
+  return prev.concat(current);
+}
+function checkHit(bomb){
+  ships.forEach(function(ship){
+    ship.isHit(bomb.x, bomb.y);
+  });
+}
+
+
+
+
+
+// helpers
 function drawTextLeft(s, fSize, btm){
   btm = btm || 40;
   fSize = fSize || '12px';

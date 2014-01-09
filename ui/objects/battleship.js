@@ -15,8 +15,8 @@ function Battleship(){
   this.y = h - 160;
 }
 Battleship.prototype = {
-  hit: false,
-  speed: 0.1,
+  damage: false,
+  speed: 0.2,
   x: 0,
   y: 0,
   step: function(){
@@ -25,18 +25,21 @@ Battleship.prototype = {
     }
   },
   draw: function(){
-    if (this.hit){
+    if (this.damage){
       this.hit.draw(Math.floor(this.x), this.y);
     } else {
       this.noDamage.draw(Math.floor(this.x), this.y);
     }
   },
+  left: function(){ return this.x + 10 },
+  right: function(){ return this.x + 200 },
+  top: function(){ return this.y + 45 },
   isHit: function(x, y){
-    if (y > h - 160){
-      if (x > this.x && x < this.x + 250){
-        this.hit = true;
+    if (y > this.top()){
+      if (x > this.left() && x < this.right()){
+        this.damage = true;
       }
     }
-    return this.hit;
+    return this.damage;
   }
 };
