@@ -1,33 +1,31 @@
-/*global keys,images,measuring,TO_RADIANS,Sprite, Ship, Invader, InvaderLine, InvaderLineCollection, INVADER_SPRITES */
 
-var canvas  = document.getElementById('canvas'),
-  c       = canvas.getContext('2d'),
-  w       = canvas.width,
-  h       = canvas.height,
-
-  cleanup = { bullets: [], invaders: [] }
-;
+var canvas  = document.getElementById('canvas')
+  , c = canvas.getContext('2d')
+  , w = canvas.width
+  , h = canvas.height
+  ;
 // share the context
 images.context = measuring.context = c;
 
-// setup sprites
-var sprites = images.getImage('ui/img/sprites.png')
-  , logo = new Sprite(sprites, 250, 150, [
-    [0, 0]
-  ])
+// setup images
+var logo
+  , sprites
+  , bg
+  , preload = [
+    'ui/img/sprites.png',
+    'ui/img/bg.png'
+  ]
   ;
 
-// elements
-var players = [new Player('bob')]
-  , ship = null
-  , bullets = []
+// objects
+var players = []
   ;
 
 // score
-var score = 0,
-  gameStartTime,
-  gameEndTime,
-  maxTime = 75000
+var score = 0
+  , gameStartTime
+  , gameEndTime
+  , maxTime = 75000
 ;
 
 // state
@@ -36,19 +34,39 @@ var states = {
     PLAYING: 'PLAYING',
     WON: 'WON',
     LOST: 'LOST'
-  },
-  state = states.NOT_STARTED
+  }
+  , state = states.NOT_STARTED
 ;
+
+/**
+ * With canvas we need to preload the images
+ * before we can draw them
+ */
+images.preload(preload, init);
+
+/**
+ * Once the images have been preloaded we are ready to set
+ * up the initial state of the game
+ */
+function init(){
+  sprites = images.getImage('ui/img/sprites.png');
+  bg = new Sprite(images.getImage('ui/img/bg.png'), 900, 700, [[0,0]]);
+  logo = new Sprite(sprites, 250, 150, [
+    [0, 0]
+  ]);
+
+  // start the game loop
+  frame();
+}
 
 function frame() {
   window.requestAnimationFrame(frame);
-  step(); // work out what is happening
-  draw(); // draw the current state
+  step(); // move the scene around and check logic
+  draw(); // draw the current state of the scene
 }
 
 // set up environment
 function step() {
-
   switch (state){
     case states.NOT_STARTED:
       if (players.length){
@@ -86,9 +104,10 @@ function draw () {
   c.clearRect(0, 0, w, h);
   c.fillStyle = '#000';
   c.fillRect(0,0,w,h);
+  bg.draw(0, 0, 0);
   switch (state){
     case states.NOT_STARTED:
-      logo.draw(0, (w/2)-170, 100);
+      logo.draw(0, (w/2)-125, 100);
       drawTextLeft('Press space to start', '16px');
       break;
     case states.PLAYING:
@@ -112,13 +131,11 @@ function draw () {
   }
 }
 
-// start the game
-frame();
 
 
 // helpers
 function drawTextLeft(s, fSize, btm){
-  btm = btm || 20;
+  btm = btm || 40;
   fSize = fSize || '12px';
   c.textAlign = 'left';
   c.font = fSize + ' Arial';
