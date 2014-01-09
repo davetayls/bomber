@@ -66,7 +66,7 @@ images.preload(preload, init);
  */
 function init(){
   // set up image sprites
-  // sprites =
+  sprites = images.getImage(preload[0]);
   // bg = 900 wide 700 tall
   logo = new Sprite(sprites, 250, 150, [
     [0, 0],
@@ -77,6 +77,7 @@ function init(){
   // create a player and a ship
 
   // start the game loop
+  frame();
 }
 
 
@@ -112,6 +113,7 @@ function frame() {
 function step() {
   switch (state){
     case states.NOT_STARTED:
+      logo.draw((w/2)-125, 10, 0);
       if (players.length){
         if (players[0].keys.space.down){
           gameStartTime = Date.now();
@@ -146,12 +148,11 @@ function step() {
 
 // draw environment
 function draw () {
-  c.clearRect(0, 0, w, h);
-  c.fillStyle = '#000';
-  c.fillRect(0,0,w,h);
-  bg.draw(0, 0, 0);
-  players.forEach(drawObj);
-  ships.forEach(drawObj);
+  clearScene();
+
+//  bg.draw(0, 0, 0);
+  // draw objects
+
   switch (state){
     case states.NOT_STARTED:
       logo.draw((w/2)-125, 100, 0);
@@ -204,6 +205,11 @@ function isOutside(prev, current){
 
 
 // helpers
+function clearScene() {
+  c.clearRect(0, 0, w, h);
+  c.fillStyle = '#000';
+  c.fillRect(0,0,w,h);
+}
 function drawTextLeft(s, fSize, btm){
   btm = btm || 40;
   fSize = fSize || '12px';

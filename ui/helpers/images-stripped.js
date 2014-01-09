@@ -20,7 +20,13 @@ var images = {
     var self = this
       , ln = sources.length
       ;
-    // ...
+    sources.forEach(function(url){
+      self.getImage(url, function(){
+        if (--ln === 0 && cb){
+          cb.call(sources);
+        }
+      });
+    });
   },
 
   drawSprite: function (img, left, top, width, height, x, y){
