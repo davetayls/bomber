@@ -87,13 +87,13 @@ function step() {
       players.map(getBombs).reduce(flatten).forEach(checkHit);
 
       // check if you have won
-      if (false){
+      if (ships.reduce(isHit, false)){
         state = states.WON;
         gameEndTime = new Date().getTime();
       }
 
       // check if you have lost
-      if (false){
+      if (players.reduce(isOutside, false)){
         state = states.LOST;
         gameEndTime = new Date().getTime();
       }
@@ -122,11 +122,11 @@ function draw () {
       break;
     case states.WON:
       var win = winningPlayer();
-      logo.draw((w/2)-170, 100, 0);
-      drawTextLeft(win.nickname +' has WON! Your score is '+ win.ship.points +'. time: '+ finalTime(), '18px');
+      logo.draw((w/2)-125, 100, 0);
+      drawTextLeft(win.nickname +' has WON!. time: '+ finalTime(), '18px');
       break;
     case states.LOST:
-      logo.draw((w/2)-170, 100, 0);
+      logo.draw((w/2)-125, 100, 0);
       drawTextLeft('You have LOST!', '18px');
       break;
   }
@@ -151,6 +151,12 @@ function checkHit(bomb){
   ships.forEach(function(ship){
     ship.isHit(bomb.x, bomb.y);
   });
+}
+function isHit(prev, current){
+  return current.damage || prev;
+}
+function isOutside(prev, current){
+  return current.plane.x > w || prev;
 }
 
 
@@ -177,19 +183,8 @@ function gameTime(ms){
 function finalTime(){
   return gameTime(gameEndTime - gameStartTime);
 }
-function addScore(points){
-  var timeDecay = (1 - (gameTimeMilliseconds()/maxTime));
-  timeDecay = timeDecay < 0.3 ? 0.3 : timeDecay;
-  score += Math.ceil(points * timeDecay);
-}
 function winningPlayer(){
-  var winning, points = 0;
-  players.forEach(function(player){
-    if (player.ship.points > points){
-      winning = player;
-    }
-  });
-  return winning;
+  return players[0];
 }
 function eachClean(arr, fn){
   var ln = arr.length;
