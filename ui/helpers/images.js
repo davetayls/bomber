@@ -27,8 +27,7 @@ var images = {
 
   images:   {},
   getImage: function (src, cb){
-    var self = this;
-    var img = self.images[src];
+    var img = this.images[src];
     if (img && cb){
       cb.call(img);
       return img;
@@ -36,7 +35,7 @@ var images = {
       img = new Image();
       img.onload = cb;
       img.src = src;
-      self.images[src] = img;
+      this.images[src] = img;
       return img;
     }
   },
